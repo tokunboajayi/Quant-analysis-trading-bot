@@ -1,0 +1,115 @@
+/* QuantDash Theme Tokens - Bloomberg-grade styling */
+
+:root {
+    /* Grid system */
+    --grid-columns: 12;
+    --grid-gutter: 24px;
+    --grid-gap: 16px;
+
+    /* Panel tokens */
+    --panel-bg: #12121a;
+    --panel-bg-hover: #1a1a24;
+    --panel-border: #1f1f2e;
+    --panel-padding: 12px;
+    --panel-radius: 8px;
+
+    /* Card tokens */
+    --card-bg: #0c0c12;
+    --card-height: 56px;
+    --card-padding-x: 14px;
+    --card-padding-y: 12px;
+
+    /* Typography */
+    --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+    --font-sans: 'Inter', 'SF Pro Display', system-ui, sans-serif;
+
+    /* Type scale */
+    --text-section: 11px;
+    --text-body: 12px;
+    --text-value-lg: 18px;
+    --text-value-sm: 11px;
+
+    /* Colors - semantic */
+    --color-bg: #0a0a0f;
+    --color-text: #ffffff;
+    --color-text-muted: #9ca3af;
+    --color-text-dim: #6b7280;
+
+    /* Status colors */
+    --color-positive: #22c55e;
+    --color-warning: #eab308;
+    --color-negative: #ef4444;
+    --color-info: #3b82f6;
+
+    /* Chart colors */
+    --color-chart-green: #10b981;
+    --color-chart-red: #f43f5e;
+    --color-chart-blue: #0ea5e9;
+    --color-chart-purple: #a855f7;
+}
+
+/* Global numeric alignment */
+.tabular-nums {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+}
+
+/* Section title style */
+.section-title {
+    font-size: var(--text-section);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-dim);
+}
+
+/* Value alignment */
+.value-right {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Grid overlay for dev */
+.grid-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gap);
+    padding: 0 var(--grid-gutter);
+}
+
+.grid-overlay>div {
+    background: rgba(59, 130, 246, 0.08);
+    border-left: 1px solid rgba(59, 130, 246, 0.2);
+    border-right: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Consistent row heights */
+.row-sm {
+    height: 32px;
+}
+
+.row-md {
+    height: 40px;
+}
+
+.row-lg {
+    height: 56px;
+}
+
+/* Progress bar base */
+.progress-bar {
+    height: 6px;
+    background: #1a1a24;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}

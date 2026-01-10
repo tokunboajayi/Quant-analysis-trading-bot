@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  daily_runner:
+    build: .
+    image: riskfusion-alpha:latest
+    container_name: riskfusion-daily
+    user: riskfusion
+    volumes:
+      # Persist data
+      - ./data:/app/data
+    env_file:
+      - .env
+    command: python -m riskfusion.cli run_daily
+    # We don't want this to restart automatically if it's a one-off job, 
+    # but for composition usually we might have a long running service.
+    # Here we treat it as a toolbox. 
+    # To run daily via cron on host + docker, use: 
+    # docker compose run daily_runner
+    profiles: [ "batch" ]
+
+  dashboard:
+    build: .
+    image: riskfusion-alpha:latest
+    container_name: riskfusion-dashboard
+    user: riskfusion
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+    env_file:
+      - .env
+    command: streamlit run riskfusion/dashboard/app.py
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "http://localhost:8501/_stcore/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3

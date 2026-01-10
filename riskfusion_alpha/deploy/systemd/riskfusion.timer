@@ -1,0 +1,12 @@
+[Unit]
+Description=Run RiskFusion Alpha at 6:30 PM ET (Close + 2.5h)
+
+[Timer]
+# 6:30 PM ET is roughly 22:30 UTC or 23:30 UTC depending on DST.
+# We set it to 23:00 UTC to be safe for all US market closes.
+OnCalendar=Mon..Fri *-*-* 23:00:00
+Persistent=true
+Unit=riskfusion.service
+
+[Install]
+WantedBy=timers.target

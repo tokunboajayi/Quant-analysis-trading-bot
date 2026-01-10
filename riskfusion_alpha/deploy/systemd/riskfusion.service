@@ -1,0 +1,16 @@
+[Unit]
+Description=RiskFusion Alpha Daily Run
+After=network.target
+
+[Service]
+Type=oneshot
+User=root
+# Change to your user
+WorkingDirectory=/opt/riskfusion_alpha
+# EnvironmentFile=/opt/riskfusion_alpha/.env
+ExecStart=/opt/riskfusion_alpha/scripts/cron/run_daily.sh
+StandardOutput=append:/var/log/riskfusion.log
+StandardError=append:/var/log/riskfusion.log
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,83 @@
+# ========================
+# RiskFusion Alpha
+# Git Ignore Configuration
+# ========================
+
+# -------- Python --------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.spec
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# -------- Virtual Environments --------
+venv/
+.venv/
+env/
+ENV/
+.conda/
+
+# -------- Jupyter --------
+.ipynb_checkpoints
+*.ipynb
+
+# -------- IDE --------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# -------- Data & Artifacts --------
+data/raw/
+data/processed/
+data/models/**/*.pkl
+data/models/**/*.joblib
+data/outputs/
+data/audit/
+data/*.db
+*.db
+
+# -------- Logs --------
+*.log
+logs/
+riskfusion.log
+
+# -------- Secrets & Keys --------
+.env
+.env.local
+.env.*.local
+keys/
+secrets/
+*.pem
+*.key
+
+# -------- Build Artifacts --------
+dist/
+build/
+*.egg-info/
+.eggs/
+*.egg
+
+# -------- Test & Coverage --------
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# -------- Docker --------
+.docker_volume/
+
+# -------- OS Files --------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -------- Debug Logs --------
+build_debug*.log
+verify_output*.txt
+test_*_out.txt

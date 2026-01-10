@@ -1,0 +1,67 @@
+# ========================
+# QuantDash
+# Git Ignore Configuration
+# ========================
+
+# -------- Node --------
+node_modules/
+.npm
+.yarn
+.pnp.*
+
+# -------- Next.js --------
+.next/
+out/
+.swc/
+
+# -------- Build --------
+dist/
+build/
+
+# -------- IDE --------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# -------- Python (API) --------
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+*.egg-info/
+
+# -------- Logs --------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# -------- Secrets --------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# -------- OS --------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -------- Test --------
+coverage/
+.nyc_output/
+.pytest_cache/
+.coverage
+
+# -------- Docker --------
+.docker_volume/
+
+# -------- Misc --------
+*.bak
+*.tmp
+telemetry_sample.json

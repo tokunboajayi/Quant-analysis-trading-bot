@@ -1,0 +1,159 @@
+project_name: "RiskFusion Alpha"
+
+paths:
+  data: "data"
+  raw: "data/raw"
+  processed: "data/processed"
+  models: "data/models"
+  outputs: "data/outputs"
+  audit: "data/audit"
+
+universe:
+  tickers:
+    # Major Sector ETFs
+    - SPY
+    - QQQ
+    - IWM
+    - GLD
+    - TLT
+    - XLF
+    - XLK
+    - XLV
+    - XLE
+    - XLY
+    - XLP
+    - XLI
+    - XLB
+    - XLU
+    - XLRE
+    # Top liquid stocks (mix of sectors)
+    - AAPL
+    - MSFT
+    - NVDA
+    - AMZN
+    - GOOGL
+    - META
+    - TSLA
+    - JPM
+    - V
+    - JNJ
+    - WMT
+    - PG
+    - XOM
+    - MA
+    - UNH
+    - HD
+    - LLY
+    - AVGO
+    - CVX
+    - MRK
+    - KO
+    - PEP
+    - COST
+    - ABBV
+    - ADBE
+    - WFC
+    - BAC
+    - CMCSA
+    - DIS
+    - NFLX
+    - AMD
+    - INTC
+    - CSCO
+    - PFE
+    - T
+    - VZ
+    - NKE
+    - BA
+    - MMM
+    - CAT
+    - GS
+    - MS
+    - C
+    - BLK
+  benchmark: "SPY"
+
+data:
+  start_date: "2015-01-01"
+  provider: "yfinance"
+
+models:
+  retrain_freq: "monthly" # monthly, weekly, daily
+  alpha:
+    horizon: 5 # days
+    target: "forward_return_5d"
+    model_type: "lightgbm_ranker"
+  risk:
+    vol_lookback: 20
+    var_quantile: 0.05
+  event:
+    impact_threshold_1d: 0.02
+    impact_threshold_5d: 0.05
+
+portfolio:
+  initial_capital: 100000.0
+  target_vol_ann: 0.10
+  max_weight: 0.10
+  max_turnover: 0.30
+  min_dollar_volume: 1000000 # 1M daily volume filter
+  costs_bps: 5
+  long_only: true
+  top_n: 15
+  event_overlay:
+    enabled: true
+    alpha: 0.5 
+    multiplier_min: 0.5
+
+logging:
+  level: "INFO"
+  file: "riskfusion.log"
+
+# ============================================================
+# CRAZY QUANT LADDER FLAGS (ALL OFF BY DEFAULT)
+# ============================================================
+
+# Step 1: Distributional Alpha (Quantile Models)
+alpha:
+  use_quantiles: false
+  quantiles: [0.1, 0.5, 0.9]
+  quality_formula: "q50_over_abs_q10"  # or "q90_over_abs_q10"
+
+# Step 2: Meta-Labeler (Trade Filter)
+meta:
+  enabled: false
+  threshold: 0.55
+  apply_as_multiplier: true
+
+# Step 3: CVXPY Optimizer
+optimizer:
+  method: "heuristic"  # "heuristic" or "cvxpy"
+  risk_aversion: 1.0
+  cost_bps: 5
+  turnover_cap: 0.30
+
+# Step 4: Graph/Cluster Risk Caps
+graph:
+  enabled: false
+  correlation_window: 60
+  max_cluster_exposure: 0.25
+  clustering_method: "hierarchical"
+
+# Step 5: Multi-Task Event Risk
+event:
+  multitask: false
+  predict_direction: true
+  predict_magnitude: true
+
+# Step 6: Regime Switching
+regime:
+  enabled: false
+  states: ["calm", "volatile", "stressed"]
+  vol_threshold_volatile: 0.20
+  vol_threshold_stressed: 0.35
+
+# Step 7: Online Learning
+online_learning:
+  enabled: false
+  drift_psi_threshold: 0.25
+  var_breach_threshold: 0.10
+  min_retrain_interval_days: 7

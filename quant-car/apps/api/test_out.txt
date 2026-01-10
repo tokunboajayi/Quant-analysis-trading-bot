@@ -1,0 +1,52 @@
+﻿python : Traceback 
+(most recent call 
+last):
+At line:1 char:71
++ ... \apps\api"; 
+python -c "from app.t
+elemetry.builder 
+import TelemetryBui 
+...
++                 ~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (Traceba   
+ ck (most recent     
+call last)::Stri    
+ng) [], RemoteEx    
+ception
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+  File "<string>", 
+line 1, in <module>
+  File "C:\Users\olat
+o\OneDrive\Documents\
+finance ai\quant-car\
+apps\api\app\telemetr
+y\builder.py", line 
+83, in build_frame
+    return_1d=0.002 
+if ablation else 0
+  File "C:\pinokio\bi
+n\miniconda\lib\site-
+packages\pandas\core\
+generic.py", line 
+1580, in __nonzero__
+    raise ValueError(
+ValueError: The 
+truth value of a 
+DataFrame is 
+ambiguous. Use 
+a.empty, a.bool(), 
+a.item(), a.any() or 
+a.all().
+Γ£à Data directory found: C:\Users\olato\OneDrive\Documents\finance ai\riskfusion_alpha\data\outputs
+≡ƒôé TelemetryBuilder initialized with data_dir: C:\Users\olato\OneDrive\Documents\finance ai\riskfusion_alpha\data\outputs
+≡ƒôè Building frame for 20260108
+  Γ£à Loaded weights: 225 rows, 4 unique tickers
+  Γ£à Parsed monitoring: 7 PSI values
