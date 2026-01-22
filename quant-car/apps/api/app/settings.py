@@ -45,7 +45,7 @@ settings = Settings()
 
 # Validate data directory exists
 if not settings.DATA_OUTPUT_DIR.exists():
-    print(f"⚠️  WARNING: Data directory not found: {settings.DATA_OUTPUT_DIR}")
+    print(f"[WARNING] Data directory not found: {settings.DATA_OUTPUT_DIR}")
     print("   The API will return degraded telemetry until RiskFusion generates data.")
 else:
-    print(f"✅ Data directory found: {settings.DATA_OUTPUT_DIR}")
+    print(f"[OK] Data directory found: {settings.DATA_OUTPUT_DIR}")

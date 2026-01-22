@@ -5,7 +5,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-const API_BASE = 'http://localhost:8000'
+const API_BASE = 'http://localhost:8005'
 
 interface KPI { name: string; a: number; b: number; delta: number; better: 'higher' | 'lower'; format: 'pct' | 'num' }
 
@@ -132,8 +132,8 @@ export default function ComparePage() {
                         </div>
 
                         <div className={`text-center py-3 rounded font-bold text-lg ${recommendation === 'PROMOTE' ? 'bg-green-900/50 text-green-300 border border-green-700/50' :
-                                recommendation === 'HOLD' ? 'bg-yellow-900/50 text-yellow-300 border border-yellow-700/50' :
-                                    'bg-red-900/50 text-red-300 border border-red-700/50'
+                            recommendation === 'HOLD' ? 'bg-yellow-900/50 text-yellow-300 border border-yellow-700/50' :
+                                'bg-red-900/50 text-red-300 border border-red-700/50'
                             }`}>
                             {recommendation}
                         </div>

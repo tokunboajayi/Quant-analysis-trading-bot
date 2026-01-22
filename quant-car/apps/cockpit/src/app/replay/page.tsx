@@ -5,7 +5,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-const API_BASE = 'http://localhost:8000'
+const API_BASE = 'http://localhost:8005'
 
 interface RunInfo { run_id: string; date: string; frame_count?: number }
 

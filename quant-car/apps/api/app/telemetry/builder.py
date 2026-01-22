@@ -30,7 +30,7 @@ class TelemetryBuilder:
     def __init__(self, data_dir: Optional[Path] = None):
         self.data_dir = data_dir or settings.DATA_OUTPUT_DIR
         self._latest_frame: Optional[TelemetryFrame] = None
-        print(f"📂 TelemetryBuilder initialized with data_dir: {self.data_dir}")
+        print(f"[INFO] TelemetryBuilder initialized with data_dir: {self.data_dir}")
     
     def build_frame(self, trading_date: Optional[str] = None) -> TelemetryFrame:
         """
@@ -40,7 +40,7 @@ class TelemetryBuilder:
         if trading_date is None:
             trading_date = self._get_latest_trading_date()
         
-        print(f"📊 Building frame for {trading_date}")
+        print(f"[INFO] Building frame for {trading_date}")
         
         # Load real artifacts
         weights = self._load_weights(trading_date)
@@ -179,7 +179,7 @@ class TelemetryBuilder:
         path = self.data_dir / f"daily_weights_{date}.csv"
         if path.exists():
             df = pd.read_csv(path)
-            print(f"  ✅ Loaded weights: {len(df)} rows, {df['ticker'].nunique()} unique tickers")
+            print(f"  [OK] Loaded weights: {len(df)} rows, {df['ticker'].nunique()} unique tickers")
             return df
         
         # Try finding any weights file
@@ -187,10 +187,10 @@ class TelemetryBuilder:
         if files:
             latest = max(files, key=lambda f: f.stem)
             df = pd.read_csv(latest)
-            print(f"  ⚠️ Using weights from {latest.stem}")
+            print(f"  [WARN] Using weights from {latest.stem}")
             return df
         
-        print(f"  ❌ No weights file found")
+        print(f"  [ERROR] No weights file found")
         return None
     
     def _load_monitoring_report(self, date: str) -> Optional[Dict]:
@@ -224,7 +224,7 @@ class TelemetryBuilder:
         }
         
         # Extract PSI values
-        psi_pattern = r'\| (\w+) \| ⚠️ ([\d.]+) \|'
+        psi_pattern = r'\| (\w+) \| WARN ([\d.]+) \|'
         for match in re.finditer(psi_pattern, content):
             feature, psi = match.groups()
             data['drift_psi'][feature] = float(psi)
@@ -242,7 +242,7 @@ class TelemetryBuilder:
         if conc_match:
             data['concentration_top5'] = float(conc_match.group(1))
         
-        print(f"  ✅ Parsed monitoring: {len(data['drift_psi'])} PSI values")
+        print(f"  [OK] Parsed monitoring: {len(data['drift_psi'])} PSI values")
         return data
     
     def _load_ablation_metrics(self, date: str) -> Optional[pd.DataFrame]:

@@ -1,2 +1,2 @@
 # Routes module
-from . import health, telemetry, ws, replay
+from . import health, telemetry, ws, replay, portfolio

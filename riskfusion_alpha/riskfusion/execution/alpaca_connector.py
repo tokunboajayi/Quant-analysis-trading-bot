@@ -68,3 +68,25 @@ class AlpacaConnector:
         resp = requests.delete(f"{self.base_url}/v2/positions", headers=self.headers)
         resp.raise_for_status()
         return resp.json()
+
+    def close_position(self, symbol: str) -> Dict:
+        """Close a single position completely."""
+        logger.info(f"Closing position: {symbol}")
+        resp = requests.delete(f"{self.base_url}/v2/positions/{symbol}", headers=self.headers)
+        if resp.status_code != 200:
+            logger.error(f"Close position failed: {resp.text}")
+            resp.raise_for_status()
+        return resp.json()
+
+    def cancel_all_orders(self) -> List[Dict]:
+        """Cancel all open orders."""
+        logger.warning("Cancelling ALL open orders.")
+        resp = requests.delete(f"{self.base_url}/v2/orders", headers=self.headers)
+        resp.raise_for_status()
+        return resp.json()
+
+    def get_orders(self, status: str = "open") -> List[Dict]:
+        """Get orders by status (open, closed, all)."""
+        resp = requests.get(f"{self.base_url}/v2/orders?status={status}", headers=self.headers)
+        resp.raise_for_status()
+        return resp.json()

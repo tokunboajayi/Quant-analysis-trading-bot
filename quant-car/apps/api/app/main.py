@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from app.settings import settings
-from app.routes import health, telemetry, ws, replay, research, incidents, bot
+from app.routes import health, telemetry, ws, replay, research, incidents, bot, portfolio
 from app.telemetry.builder import TelemetryBuilder
 
 
@@ -21,9 +21,9 @@ async def lifespan(app: FastAPI):
     # Startup: build initial frame
     try:
         builder.build_frame()
-        print("✅ Initial telemetry frame built")
+        print("[OK] Initial telemetry frame built")
     except Exception as e:
-        print(f"⚠️ Could not build initial frame: {e}")
+        print(f"[WARN] Could not build initial frame: {e}")
     
     yield
     
@@ -41,7 +41,7 @@ app = FastAPI(
 # CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000", "http://localhost:3001", "http://127.0.0.1:3001", "http://localhost:3002", "http://127.0.0.1:3002"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -55,6 +55,7 @@ app.include_router(replay.router, prefix="/replay", tags=["Replay"])
 app.include_router(research.router)
 app.include_router(incidents.router)
 app.include_router(bot.router)
+app.include_router(portfolio.router)
 
 
 @app.get("/")

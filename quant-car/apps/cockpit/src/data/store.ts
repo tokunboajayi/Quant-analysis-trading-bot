@@ -2,7 +2,7 @@
  * Telemetry Store - Simplified version using HTTP polling
  */
 
-const API_BASE = 'http://localhost:8000'
+const API_BASE = 'http://localhost:8005'
 
 // Types inline to avoid import issues
 interface TelemetryFrame {

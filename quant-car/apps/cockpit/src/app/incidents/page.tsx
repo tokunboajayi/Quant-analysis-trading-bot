@@ -5,7 +5,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-const API_BASE = 'http://localhost:8000'
+const API_BASE = 'http://localhost:8005'
 
 interface Incident {
     id: string
@@ -95,7 +95,7 @@ export default function IncidentsPage() {
                                                 {inc.type.replace(/_/g, ' ')}
                                             </span>
                                             <span className={`ml-auto w-2 h-2 rounded-full ${inc.severity === 3 ? 'bg-red-500' :
-                                                    inc.severity === 2 ? 'bg-yellow-500' : 'bg-blue-500'
+                                                inc.severity === 2 ? 'bg-yellow-500' : 'bg-blue-500'
                                                 }`} />
                                         </div>
                                         <div className="text-xs text-gray-500 mt-1 line-clamp-1">{inc.short_summary}</div>
